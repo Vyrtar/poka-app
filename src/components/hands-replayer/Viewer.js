@@ -12,7 +12,6 @@ const Viewer = ({ pokerHand, currentPotSize }) => {
 
     return (
         <div>
-            <p>Current Pot Size: {currentPotSize}</p>
             <div>
                 <h2>Actions:</h2>
                 {pokerHand.actions.map((action) => (

@@ -11,35 +11,42 @@ const Replayer = () => {
         actions: [],
     });
 
-    const [currentPosition, setCurrentPosition] = useState(1);
+    const [currentPosition, setCurrentPosition] = useState('SB');
     const [currentPotSize, setCurrentPotSize] = useState(0);
     const [currentAction, setCurrentAction] = useState('posts');
-    const [currentBet, setCurrentBet] = useState(0)
+    const [currentBet, setCurrentBet] = useState(1)
+    const [inputData, setInputData] = useState(2);
     const handleFold = () => {
-        setCurrentAction('folds')
-        addAction();
+        addAction('folds', currentBet);
         console.log(pokerHand)
     };
 
     const handleCheck = () => {
-        addAction('checks');
+        addAction('checks', currentBet);
     };
 
     const handleCall = () => {
-        addAction('calls');
+        addAction('calls', currentBet);
     };
+
 
     const handleRaise = () => {
-        addAction('raises', 2);
-        setCurrentPotSize(currentPotSize*2);
+        addAction('raises', inputData);
+        setCurrentBet(inputData);
+        setCurrentAction('raises');
     };
 
-    const addAction = () => {
+    const handleInputChange = (value) => {
+        setInputData(value);
+        console.log('Input data in parent:', value);
+    };
+
+    const addAction = (type, bet, pot) => {
         const newAction = {
             actionID: pokerHand.actions.length + 1,
-            position: pokerHand.positions[currentPosition].Name,
-            actionType: currentAction,
-            actionSize: currentBet,
+            position: currentPosition,
+            actionType: type,
+            actionSize: bet,
         };
 
         setPokerHand((prevPokerHand) => ({
@@ -52,11 +59,13 @@ const Replayer = () => {
         <div>
             <InputUI
                 currentPosition={currentPosition}
-                setCurrentPosition={setCurrentPosition}
+                currentPot={currentPotSize}
+                currentBet={currentBet}
                 handleFold={handleFold}
                 handleCheck={handleCheck}
                 handleCall={handleCall}
                 handleRaise={handleRaise}
+                onInputChange={handleInputChange}
             />
             <Viewer pokerHand={pokerHand} currentPotSize={currentPotSize} />
         </div>
