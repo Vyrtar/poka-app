@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import InputUI from './Input-ui';
 import Viewer from './Viewer';
 
@@ -14,11 +14,11 @@ const Replayer = () => {
     const [currentPosition, setCurrentPosition] = useState('SB');
     const [currentPotSize, setCurrentPotSize] = useState(0);
     const [currentAction, setCurrentAction] = useState('posts');
-    const [currentBet, setCurrentBet] = useState(1)
+    const [currentBet, setCurrentBet] = useState(1);
     const [inputData, setInputData] = useState(2);
     const handleFold = () => {
         addAction('folds', currentBet);
-        console.log(pokerHand)
+        console.log(pokerHand.actions[0].actionSize)
     };
 
     const handleCheck = () => {
@@ -67,7 +67,10 @@ const Replayer = () => {
                 handleRaise={handleRaise}
                 onInputChange={handleInputChange}
             />
-            <Viewer pokerHand={pokerHand} currentPotSize={currentPotSize} />
+            <Viewer
+                pokerHand={pokerHand}
+                currentPotSize={currentPotSize}
+            />
         </div>
     );
 };
