@@ -18,7 +18,7 @@ const Replayer = () => {
     const [inputData, setInputData] = useState(2);
     const handleFold = () => {
         addAction('folds', currentBet);
-        console.log(pokerHand.actions[0].actionSize)
+        
     };
 
     const handleCheck = () => {
