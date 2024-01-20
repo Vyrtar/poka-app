@@ -12,8 +12,9 @@ import Upload from './pages/Upload';
 
 function App() {
   return (
+   
     <Router>
-      <div>
+      <div className='App'>
       <Navbar bg="dark" variant="dark" expand="lg" className="body">
       <Container>
         <Navbar.Brand href="/">pkHands.com</Navbar.Brand>
@@ -23,7 +24,9 @@ function App() {
             <Nav.Link href="/hands">See Hands</Nav.Link>
             <Nav.Link href="/upload">Upload Hand</Nav.Link>
             <NavDropdown title="Dropdownthingy" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Login</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.1">
+                Login
+              </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Login even harder
               </NavDropdown.Item>
@@ -37,6 +40,7 @@ function App() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    <hr />
 
         <Routes>
           <Route path="/hands" element={<Upload />} />
@@ -44,6 +48,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+ 
   );
 }
 

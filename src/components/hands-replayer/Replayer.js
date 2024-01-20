@@ -1,13 +1,9 @@
 import React, { useState, useRef } from 'react';
-import InputUI from './Input-ui';
+import { Button } from 'react-bootstrap';
 import Viewer from './Viewer';
 
 const Replayer = () => {
     const [pokerHand, setPokerHand] = useState({
-        positions: {
-            1: { Name: 'SB', stackSize: 100 },
-            // ... (remaining positions)
-        },
         actions: [],
     });
 
@@ -16,25 +12,10 @@ const Replayer = () => {
     const [currentAction, setCurrentAction] = useState('posts');
     const [currentBet, setCurrentBet] = useState(1);
     const [inputData, setInputData] = useState(2);
-    const handleFold = () => {
-        addAction('folds', currentBet);
-        
-    };
-
-    const handleCheck = () => {
-        addAction('checks', currentBet);
-    };
-
-    const handleCall = () => {
-        addAction('calls', currentBet);
-    };
-
-
-    const handleRaise = () => {
-        addAction('raises', inputData);
-        setCurrentBet(inputData);
-        setCurrentAction('raises');
-    };
+    
+    const handleAction = (type) => {
+        console.log(type);
+    }
 
     const handleInputChange = (value) => {
         setInputData(value);
@@ -56,22 +37,22 @@ const Replayer = () => {
     };
 
     return (
-        <div>
-            <InputUI
-                currentPosition={currentPosition}
-                currentPot={currentPotSize}
-                currentBet={currentBet}
-                handleFold={handleFold}
-                handleCheck={handleCheck}
-                handleCall={handleCall}
-                handleRaise={handleRaise}
-                onInputChange={handleInputChange}
-            />
-            <Viewer
-                pokerHand={pokerHand}
-                currentPotSize={currentPotSize}
-            />
-        </div>
+        <>
+            <div className='Info'>
+                <Button variant='secondary' className='m-1' onClick={() => handleAction("fold")}>Fold</Button>
+                <Button variant='secondary' className='m-1' onClick={() => handleAction("check")}>Check</Button>
+                <Button variant='secondary' className='m-1' onClick={() => handleAction("call")}>Call</Button>
+                <Button variant='secondary' className='m-1' onClick={() => handleAction("raise")}>Raise</Button>
+                
+               
+            </div>
+            <div className='Input'>
+            
+            </div>
+            <div className='Output'>
+
+            </div>
+        </>
     );
 };
 
