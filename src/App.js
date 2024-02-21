@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react';
 import "./App.css";
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase'; 
+import { signOut } from 'firebase/auth';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Replayer from './components/hands-replayer/Replayer';
@@ -22,10 +23,17 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log("User logged out");
+    } catch (error) {
+      console.error("Logout error", error);
+    }
+  };
 
   return (
    
@@ -49,7 +57,7 @@ function App() {
               </NavDropdown.Item>
              
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
+              <NavDropdown.Item onClick={handleLogout}>
                 Logout
               </NavDropdown.Item>
             </NavDropdown>
