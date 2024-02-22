@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import "./App.css";
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './firebase'; 
+import { auth } from './firebase';
 import { signOut } from 'firebase/auth';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -36,37 +36,49 @@ function App() {
   };
 
   return (
-   
+
     <Router>
       <div className='App'>
-      <Navbar bg="dark" variant="dark" expand="lg" className="body">
-      <Container>
-        <Navbar.Brand href="/">pkHands.com</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/hands">See Hands</Nav.Link>
-            <Nav.Link href="/upload">Upload Hand</Nav.Link>
-            <NavDropdown title="Dropdownthingy" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/login">
-                Login
-              </NavDropdown.Item>
-             
-              <NavDropdown.Item href="/register">
-                Register
-              </NavDropdown.Item>
-             
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick={handleLogout}>
-                Logout
-              </NavDropdown.Item>
-            </NavDropdown>
-            <p>{user ? user.email : "Login"}</p>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-    <hr />
+        <Navbar bg="dark" variant="dark" expand="lg" className="body">
+          <Container>
+            <Navbar.Brand href="/">pkHands.com</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="/hands">See Hands</Nav.Link>
+                <Nav.Link href="/upload">Upload Hand</Nav.Link>
+                {
+                  !user ?
+                    <NavDropdown title="Login" id="basic-nav-dropdown">
+                      <NavDropdown.Item href="/login">
+                        Login
+                      </NavDropdown.Item>
+                      <NavDropdown.Item href="/register">
+                        Register
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                    :
+                    <NavDropdown title={user.email} id="basic-nav-dropdown">
+                      <NavDropdown.Item href="/myhands">
+                        My Hands
+                      </NavDropdown.Item>
+                      <NavDropdown.Item href="/mygraph">
+                        My Graph
+                      </NavDropdown.Item>
+                      <NavDropdown.Item href="/mysessions">
+                        My Sessions
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item onClick={handleLogout}>
+                        Logout
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                }
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+        <hr />
 
         <Routes>
           <Route path="/hands" element={<Upload />} />
@@ -76,7 +88,7 @@ function App() {
         </Routes>
       </div>
     </Router>
- 
+
   );
 }
 
