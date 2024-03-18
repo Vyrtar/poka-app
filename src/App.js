@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./App.css";
-import { onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import { signOut } from 'firebase/auth';
 import Container from 'react-bootstrap/Container';
@@ -14,15 +14,24 @@ import Replayer from './components/hands-replayer/Replayer';
 import Upload from './pages/Upload';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Session from './pages/Session';
+import DummyDataPusher from './pages/DummyDataPusher';
 
 function App() {
 
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
     });
+
+    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
@@ -45,32 +54,32 @@ function App() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="/hands">See Hands</Nav.Link>
-                <Nav.Link href="/upload">Upload Hand</Nav.Link>
+                <Nav.Link href="/hands">see Hands</Nav.Link>
+                <Nav.Link href="/upload">upload Hand</Nav.Link>
                 {
                   !user ?
                     <NavDropdown title="Login" id="basic-nav-dropdown">
                       <NavDropdown.Item href="/login">
-                        Login
+                        login
                       </NavDropdown.Item>
                       <NavDropdown.Item href="/register">
-                        Register
+                        register
                       </NavDropdown.Item>
                     </NavDropdown>
                     :
                     <NavDropdown title={user.email} id="basic-nav-dropdown">
                       <NavDropdown.Item href="/myhands">
-                        My Hands
+                        my Hands
                       </NavDropdown.Item>
                       <NavDropdown.Item href="/mygraph">
-                        My Graph
+                        my Graph
                       </NavDropdown.Item>
                       <NavDropdown.Item href="/mysessions">
-                        My Sessions
+                        my Sessions
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item onClick={handleLogout}>
-                        Logout
+                        logout
                       </NavDropdown.Item>
                     </NavDropdown>
                 }
@@ -85,6 +94,8 @@ function App() {
           <Route path="/upload" element={<Replayer />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/mysessions" element={<Session user={user} />} />
+          
         </Routes>
       </div>
     </Router>
