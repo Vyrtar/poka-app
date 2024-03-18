@@ -7,12 +7,18 @@ const Replayer = () => {
     });
 
     const [positions, setPositions] = useState(['SB', 'BB', 'UTG', 'UTG+1', 'MP','HJ','LJ', 'CO', 'BTN']);
+    const [currentStreet, setCurrentStreet] = useState();
     const [currentPosIndex, setCurrentPosIndex] = useState(0);
     const [currentPosition, setCurrentPosition] = useState('SB');
     const [currentPotSize, setCurrentPotSize] = useState(0);
     const [currentAction, setCurrentAction] = useState('posts');
     const [currentBet, setCurrentBet] = useState(0);
     const [raiseAmount, setRaiseAmount] = useState(2);
+    const [isSetupDone, setIsSetupDone] = useState();
+    const [SB, setSB] = useState();
+    const [BB, setBB] = useState();
+    
+    
 
     const handleAction = (type) => {
         
@@ -42,6 +48,17 @@ const Replayer = () => {
 
     const handleRaiseInput = (event) => {
         setRaiseAmount(event.target.value)
+        setCurrentBet(raiseAmount);
+        console.log(event.target.value);
+    };
+
+    const handleSmallBlind = (event) => {
+        setSB(event.target.value)
+        console.log(event.target.value);
+    };
+
+    const handleBigBlind = (event) => {
+        setBB(event.target.value)
         console.log(event.target.value);
     };
 
@@ -70,20 +87,34 @@ const Replayer = () => {
 
     useEffect(() => {
         console.log('Good morning, replayer');
-        setCurrentBet(1)
+        setCurrentBet(SB)
         handleAction('posts')
-        setCurrentBet(2)
+        setCurrentBet(BB)
         handleAction('posts')
-        
-        
     }, []);
 
-    return (
-        <>
+    const setup = () => {
+        return (
+            <div style={styles.container}>
+            <div className='Info'>
+            </div>
+            <div>Please setup some Game Info.</div>
+            <div style={styles.inputContainer} >
+                    <div>Blinds: </div>
+                    <Form.Control style={styles.input} placeholder='Small Blind' onChange={handleSmallBlind} />
+                    <Form.Control style={styles.input} placeholder='Big Blind' onChange={handleBigBlind} />
+                
+            </div>
+            <Button variant='secondary' className='m-1' onClick={() => setIsSetupDone(true)}>Done</Button>
+
+        </div>
+        );
+    }
+
+    const HandReplayer = () => {
+        return(
             <div style={styles.container}>
                 <div className='Info'>
-
-
                 </div>
                 <div>Current Player: {currentPosition}, Current Bet: {currentBet}, Current Pot: {currentPotSize}</div>
                 <div style={styles.inputContainer} >
@@ -92,7 +123,7 @@ const Replayer = () => {
                     <Button variant='secondary' className='m-1' onClick={() => handleAction("calls")}>Call</Button>
                     <Button variant='secondary' className='m-1' onClick={() => handleAction("raises")}>Raise</Button>
                     <Col xs="auto">
-                        <Form.Control style={styles.input} placeholder="Raise amount" onChange={handleRaiseInput} />
+                        <Form.Control style={styles.input} value="Raise amount" onChange={handleRaiseInput} />
                     </Col>
                 </div>
                 <div style={styles.output}>
@@ -107,6 +138,15 @@ const Replayer = () => {
                     </div>
                 </div>
             </div>
+        )
+    }
+    return (
+        <>
+            {
+            isSetupDone ? 
+            HandReplayer()
+            : setup()
+            }
         </>
     );
 };
@@ -121,7 +161,8 @@ const styles = {
         gap: '10px'
     },
     input: {
-        flexGrow: 1,
+        width: '8em',
+        //flexGrow: 1,
     },
     output: {
         
