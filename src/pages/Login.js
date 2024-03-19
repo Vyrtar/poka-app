@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { auth } from '../firebase'; 
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { Button, Form } from 'react-bootstrap';
+
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -20,7 +22,7 @@ function Login() {
 
   return (
     <div>
-      <form onSubmit={handleLogin}>
+      <Form onSubmit={handleLogin}>
         <input
           type="email"
           value={email}
@@ -36,7 +38,7 @@ function Login() {
           required
         />
         <button type="submit">Login</button>
-      </form>
+      </Form>
     </div>
   );
 }

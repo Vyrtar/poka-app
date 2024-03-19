@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { getAuth } from 'firebase/auth';
-import { database } from '../firebase';
-import { ref, push, onValue } from 'firebase/database';
-import { Button } from 'react-bootstrap';
+import React from 'react';
 import UserDataLister from './UserDataLister';
-import DummyDataPusher from './DummyDataPusher';
-
-
+import SessionDataPusher from './SessionDataPusher';
 
 const Session = ({ user }) => {
-
-
     return (
         <div>
             <div>
                 {user ? (
                     <>
-                        <p>Welcome, {user.email}!</p>
-                        <DummyDataPusher user={user}/>
+                        <SessionDataPusher user={user}/>
                         <UserDataLister user={user} />
                     </>
                 ) : (

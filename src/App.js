@@ -15,7 +15,7 @@ import Upload from './pages/Upload';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Session from './pages/Session';
-import DummyDataPusher from './pages/DummyDataPusher';
+import DummyDataPusher from './pages/SessionDataPusher';
 
 function App() {
 
