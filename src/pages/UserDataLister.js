@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { database } from '../firebase'; 
-import { Card } from 'react-bootstrap';
+import { Card, CardBody, CardHeader } from 'react-bootstrap';
+
 
 const UserDataLister = ({ user }) => {
     const [userDataList, setUserDataList] = useState([]);
@@ -26,15 +27,30 @@ const UserDataLister = ({ user }) => {
     }, [user.uid]); 
     console.log(userDataList)
     return (
-        <ul>
+       <>
             <p>user data: </p>
             {userDataList.map((item) => (
                 
-                <div key={item.id}>{item.date} {item.sessionHours} {item.profitLoss}</div>
+                <Card style={styles.sessionItem} key={item.id}>
+                    <Card.Header>
+                        {item.date}
+                    </Card.Header>   
+                    <Card.Body>
+                        Hours: {item.sessionHours} P/L: {item.profitLoss}
+                    </Card.Body> 
+                </Card>
                 
             ))}
-        </ul>
+        </>
     );
 };
+
+const styles = {
+    sessionItem: {
+        margin: 6,
+        width: '20em',
+        backgroundColor: '#b9c1c9'
+    }
+}
 
 export default UserDataLister;

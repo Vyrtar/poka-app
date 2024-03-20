@@ -2,21 +2,24 @@ import React, { useState } from 'react';
 import { auth } from '../firebase'; 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+  let navigate = useNavigate('/');
+
 
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("Login successful", userCredential.user);
-      // You can redirect the user to another page or update the UI as needed
+      navigate('/');
     } catch (error) {
       console.error("Login failed", error.message);
-      // Handle errors here, such as displaying a notification to the user
     }
   };
 
@@ -37,7 +40,7 @@ function Login() {
           placeholder="Password"
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">login</button>
       </Form>
     </div>
   );
