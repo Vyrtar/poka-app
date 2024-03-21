@@ -12,10 +12,9 @@ const Session = ({ user }) => {
                         <UserDataLister user={user} />
                     </>
                 ) : (
-                    <p>Please log in.</p>
+                    <p>Authenticating...</p>
                 )}
             </div>
-
         </div>
     )
 }
