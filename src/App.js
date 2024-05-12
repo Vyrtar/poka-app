@@ -16,6 +16,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Session from './pages/Session';
 import DummyDataPusher from './pages/SessionDataPusher';
+import Parent from './components/replayer/Parent';
+import Hands from './pages/Hands';
 
 function App() {
 
@@ -31,7 +33,7 @@ function App() {
       }
     });
 
-    // Cleanup subscription on unmount
+    
     return () => unsubscribe();
   }, []);
 
@@ -90,8 +92,8 @@ function App() {
         <hr />
 
         <Routes>
-          <Route path="/hands" element={<Upload />} />
-          <Route path="/upload" element={<Replayer />} />
+          <Route path="/hands" element={<Hands />} />
+          <Route path="/upload" element={<Parent />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/mysessions" element={<Session user={user} />} />

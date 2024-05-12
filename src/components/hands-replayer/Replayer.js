@@ -18,8 +18,6 @@ const Replayer = () => {
     const [SB, setSB] = useState();
     const [BB, setBB] = useState();
     
-    
-
     const handleAction = (type) => {
         
         setCurrentAction(type)
@@ -143,9 +141,9 @@ const Replayer = () => {
     return (
         <>
             {
-            isSetupDone ? 
-            HandReplayer()
-            : setup()
+                isSetupDone ? 
+                HandReplayer()
+                : setup()
             }
         </>
     );

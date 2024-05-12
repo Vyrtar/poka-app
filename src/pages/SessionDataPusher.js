@@ -72,9 +72,6 @@ const styles = {
     input: {
         width: '8em',
     },
-    output: {
-
-    }
 };
 
 export default SessionDataPusher;
