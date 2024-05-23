@@ -1,14 +1,15 @@
 import React from "react";
-import Viewer from './Viewer';
+import Controller from "./Controller";
+import Viewer from "./Viewer";
 
-const Replayer = () => {
-
+const Replayer = ({pokerHand}) => {
+    console.log(pokerHand)
     return(
         <>
             <div>
-                Buttons
+                <Controller pokerHand={pokerHand}/>
+                <Viewer pokerHand={pokerHand} />
             </div>
-           
         </>
     )
 }

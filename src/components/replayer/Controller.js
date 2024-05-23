@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Controller = () => {
+const Controller = ({pokerHand}) => {
     const [value, setValue] = useState('');  
 
     const handleChange = (event) => {

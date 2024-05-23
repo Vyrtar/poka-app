@@ -11,7 +11,7 @@ const Parent = () => {
     return (
         <>
             {
-                isSetup ? <Replayer /> : <Setup setPokerHand={setPokerHand} setSetup={setIsSetup}/>
+                isSetup ? <Replayer pokerHand={pokerHand}/> : <Setup setPokerHand={setPokerHand} setSetup={setIsSetup}/>
             }
         </>
     )

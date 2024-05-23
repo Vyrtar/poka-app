@@ -40,7 +40,7 @@ const Setup = ({ setPokerHand, setSetup }) => {
 
     const finishSetup = () => {
         const hand = new PokerHand();
-        const stacks = {
+        const players = {
             UTG: utgStack,
             UTG1: utg1Stack,
             MP: mpStack,
@@ -55,11 +55,11 @@ const Setup = ({ setPokerHand, setSetup }) => {
         Object.keys(checkboxState).forEach(position => {
             if (checkboxState[position]) {
                 const playerPosition = position.replace('Check', '');
-                hand.setStack(playerPosition, stacks[playerPosition]);
+                hand.setStack(playerPosition, players[playerPosition]);
             }
         });
-        console.log(hand)
         setPokerHand(hand);
+        setSetup(true);
     };
 
 
