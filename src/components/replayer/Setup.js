@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import PokerHand from './PokerHand.js';
 
 const Setup = ({ setPokerHand, setSetup }) => {
     const [sB, setSb] = useState(1);
     const [bB, setBb] = useState(3);
     const [utgStack, setUtgStack] = useState(200);
-    const [utgP1Stack, setUtgP1Stack] = useState(200);
+    const [utg1Stack, setutg1Stack] = useState(200);
     const [mpStack, setMpStack] = useState(200);
     const [ljStack, setLjStack] = useState(200);
     const [hjStack, setHjStack] = useState(200);
@@ -20,12 +21,14 @@ const Setup = ({ setPokerHand, setSetup }) => {
 
     const [checkboxState, setCheckboxState] = useState({
         UTGCheck: true,
-        UTGP1Check: true,
+        UTG1Check: true,
         MPCheck: true,
         LJCheck: true,
         HJCheck: true,
         COCheck: true,
         BTNCheck: true,
+        SBCheck: true,
+        BBCheck: true
     });
 
     const handleCheckboxChange = (name) => (event) => {
@@ -36,7 +39,27 @@ const Setup = ({ setPokerHand, setSetup }) => {
     };
 
     const finishSetup = () => {
-        setPokerHand({});
+        const hand = new PokerHand();
+        const stacks = {
+            UTG: utgStack,
+            UTG1: utg1Stack,
+            MP: mpStack,
+            LJ: ljStack,
+            HJ: hjStack,
+            CO: coStack,
+            BTN: btnStack,
+            SB: sbStack,
+            BB: bbStack
+        };
+
+        Object.keys(checkboxState).forEach(position => {
+            if (checkboxState[position]) {
+                const playerPosition = position.replace('Check', '');
+                hand.setStack(playerPosition, stacks[playerPosition]);
+            }
+        });
+        console.log(hand)
+        setPokerHand(hand);
     };
 
 
@@ -96,16 +119,16 @@ const Setup = ({ setPokerHand, setSetup }) => {
                 <Form.Group style={styles.formRowStyle}>
                     <Form.Check
                         type="checkbox"
-                        checked={checkboxState.UTGP1Check}
-                        onChange={handleCheckboxChange('UTGP1Check')}
+                        checked={checkboxState.UTG1Check}
+                        onChange={handleCheckboxChange('UTG1Check')}
                     />
-                    <Form.Label>UTG+1:</Form.Label>
+                    <Form.Label>UTG1:</Form.Label>
                     <Form.Control
                         type="number"
-                        value={utgP1Stack}
-                        onChange={handleChange(setUtgP1Stack)}
-                        disabled={checkboxState.UTGP1Check}
-                        style={!checkboxState.UTGP1Check ? styles.disabledInputStyle : {}}
+                        value={utg1Stack}
+                        onChange={handleChange(setutg1Stack)}
+                        disabled={checkboxState.UTG1Check}
+                        style={!checkboxState.UTG1Check ? styles.disabledInputStyle : {}}
                     />
                 </Form.Group>
 

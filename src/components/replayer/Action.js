@@ -1,5 +1,11 @@
-import React from "react";
+export default class Action {
+    constructor(player, action, amount = null) {
+        this.player = player; 
+        this.action = action; 
+        this.amount = amount; 
+    }
 
-const Action = () => {}
-
-export default Action;
+    toString() {
+        return `${this.player} ${this.action}${this.amount !== null ? ' to ' + this.amount : ''}`;
+    }
+}
