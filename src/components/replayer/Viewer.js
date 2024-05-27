@@ -4,14 +4,12 @@ const Viewer = ({ pokerHand }) => {
 
     return (
         <div>
-            <div>
-                <h2>Actions:</h2>
-                {pokerHand.actions.map((action) => (
-                    <div style={{border: 1}} key={action.actionID}>
-                        {`${action.position} ${action.actionType} ${action.actionSize}`}
-                    </div>
-                ))}
-            </div>
+            <h4>Actions:</h4>
+            {pokerHand.actions.map((action) => (
+                <div style={{ border: 1 }} key={action.id}>
+                    {`${action.position} ${action.actionType} ${action.actionSize}`}
+                </div>
+            ))}
         </div>
     );
 };

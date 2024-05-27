@@ -4,14 +4,11 @@ import Setup from './Setup';
 
 const Parent = () => {
     const [isSetup, setIsSetup] = useState(false);
-    const [pokerHand, setPokerHand] = useState({});
-
-    
-
+    const [pokerHand, setPokerHand] = useState();
     return (
         <>
             {
-                isSetup ? <Replayer pokerHand={pokerHand}/> : <Setup setPokerHand={setPokerHand} setSetup={setIsSetup}/>
+                isSetup ? <Replayer setPokerHand={setPokerHand} pokerHand={pokerHand}/> : <Setup setPokerHand={setPokerHand} setSetup={setIsSetup}/>
             }
         </>
     )

@@ -62,8 +62,6 @@ const Setup = ({ setPokerHand, setSetup }) => {
         setSetup(true);
     };
 
-
-
     return (
         <>
             <div>Please set up some Game Info</div>

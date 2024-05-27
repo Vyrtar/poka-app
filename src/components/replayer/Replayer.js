@@ -2,8 +2,7 @@ import React from "react";
 import Controller from "./Controller";
 import Viewer from "./Viewer";
 
-const Replayer = ({pokerHand}) => {
-    console.log(pokerHand)
+const Replayer = ({pokerHand, setPokerHand}) => {
     return(
         <>
             <div>

@@ -24,9 +24,9 @@ export default class PokerHand {
         }
     }
 
-    addAction(player, action, amount = null) {
+    addAction(id, player, action, amount = null) {
         if (this.players.hasOwnProperty(player)) {
-            const pokerAction = new Action(player, action, amount);
+            const pokerAction = new Action(id, player, action, amount);
             this.actions.push(pokerAction);
         } else {
             console.error(`Invalid player position: ${player}`);
