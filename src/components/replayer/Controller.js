@@ -4,28 +4,24 @@ import { Button, Form, Col } from 'react-bootstrap';
 
 const Controller = ({ pokerHand }) => {
     const [value, setValue] = useState(0);
-    pokerHand.addAction(1, "BTN", 'raise', 15);
-    const handleChangeRaiseAmount = (event) => {
-        setValue(event.target.value);
-    };
 
     const handleAction = (type) => {
         switch (type) {
             case 'folds':
-                pokerHand.addAction(1, "BTN", 'folds', value)
-                for (var action in pokerHand.actions)
-                {
-                    console.log(action.toString());
-                }
-                    break;
+                pokerHand.addAction(pokerHand.actions.length+1, pokerHand.getNextPlayerToAct(), type, value)
+                console.log(pokerHand)
+                break;
             case 'checks':
-
+                pokerHand.addAction(pokerHand.actions.length+1, pokerHand.getNextPlayerToAct(), type, value)
+                console.log(pokerHand)
                 break;
             case 'calls':
-
+                pokerHand.addAction(pokerHand.actions.length+1, pokerHand.getNextPlayerToAct(), type, value)
+                console.log(pokerHand)
                 break;
             case 'raises':
-
+                pokerHand.addAction(pokerHand.actions.length+1, pokerHand.getNextPlayerToAct(), type, value)
+                console.log(pokerHand)
                 break;
             default:
                 console.log('idk man');
@@ -43,7 +39,7 @@ const Controller = ({ pokerHand }) => {
                 <Button variant='secondary' className='m-1' onClick={() => handleAction("calls")}>Call</Button>
                 <Button variant='secondary' className='m-1' onClick={() => handleAction("raises")}>Raise</Button>
                 <Col xs="auto">
-                    <Form.Control style={styles.input} onChange={(e) => handleChangeRaiseAmount(e)} />
+                    <Form.Control style={styles.input} onChange={(e) => setValue(e.target.value)} />
                 </Col>
             </div>
         </div>

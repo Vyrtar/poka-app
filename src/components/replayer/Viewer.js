@@ -4,10 +4,11 @@ const Viewer = ({ pokerHand }) => {
 
     return (
         <div>
+            <div>Player to act: {pokerHand.getNextPlayerToAct()}</div>
             <h4>Actions:</h4>
             {pokerHand.actions.map((action) => (
                 <div style={{ border: 1 }} key={action.id}>
-                    {`${action.position} ${action.actionType} ${action.actionSize}`}
+                    <p>{action.id}</p>
                 </div>
             ))}
         </div>

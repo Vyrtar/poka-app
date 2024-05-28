@@ -36,4 +36,27 @@ export default class PokerHand {
     getActions() {
         return this.actions.map(action => action.toString());
     }
+
+    getCurrentAction() {
+    if (this.actions.length === 0) {
+        return 1; 
+    }
+    const lastAction = this.actions[this.actions.length - 1];
+    return lastAction.id + 1; 
+    }
+
+    getNextPlayerToAct() {
+        const playerOrder = Object.keys(this.players);
+        const lastPlayerIndex = this.actions.length === 0 ? -1 : playerOrder.indexOf(this.actions[this.actions.length - 1].player);
+
+        for (let i = 1; i <= playerOrder.length; i++) {
+            const nextPlayerIndex = (lastPlayerIndex + i) % playerOrder.length;
+            const nextPlayer = playerOrder[nextPlayerIndex];
+            if (this.players[nextPlayer] !== null) {
+                return nextPlayer;
+            }
+        }
+
+        return null; 
+    }
 }

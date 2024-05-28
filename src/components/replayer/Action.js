@@ -5,8 +5,4 @@ export default class Action {
         this.action = action; 
         this.amount = amount; 
     }
-
-    toString() {
-        return `${this.id} ${this.player} ${this.action}${this.amount !== null ? ' to ' + this.amount : ''}`;
-    }
 }
