@@ -6,27 +6,8 @@ const Controller = ({ pokerHand }) => {
     const [value, setValue] = useState(0);
 
     const handleAction = (type) => {
-        switch (type) {
-            case 'folds':
-                pokerHand.addAction(pokerHand.actions.length+1, pokerHand.getNextPlayerToAct(), type, value)
-                console.log(pokerHand)
-                break;
-            case 'checks':
-                pokerHand.addAction(pokerHand.actions.length+1, pokerHand.getNextPlayerToAct(), type, value)
-                console.log(pokerHand)
-                break;
-            case 'calls':
-                pokerHand.addAction(pokerHand.actions.length+1, pokerHand.getNextPlayerToAct(), type, value)
-                console.log(pokerHand)
-                break;
-            case 'raises':
-                pokerHand.addAction(pokerHand.actions.length+1, pokerHand.getNextPlayerToAct(), type, value)
-                console.log(pokerHand)
-                break;
-            default:
-                console.log('idk man');
-                break;
-        }
+        // pokerHand.addAction(pokerHand.actions.length + 1, pokerHand.getNextPlayerToAct(), type, value)
+        console.log(pokerHand)
     }
 
     return (

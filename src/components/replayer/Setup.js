@@ -6,7 +6,7 @@ const Setup = ({ setPokerHand, setSetup }) => {
     const [sB, setSb] = useState(1);
     const [bB, setBb] = useState(3);
     const [utgStack, setUtgStack] = useState(200);
-    const [utg1Stack, setutg1Stack] = useState(200);
+    const [utg1Stack, setUtg1Stack] = useState(200);
     const [mpStack, setMpStack] = useState(200);
     const [ljStack, setLjStack] = useState(200);
     const [hjStack, setHjStack] = useState(200);
@@ -16,7 +16,7 @@ const Setup = ({ setPokerHand, setSetup }) => {
     const [bbStack, setBbStack] = useState(200);
 
     const handleChange = (setter) => (event) => {
-        setter(event.target.value);
+        setter(Number(event.target.value));
     };
 
     const [checkboxState, setCheckboxState] = useState({
@@ -39,8 +39,7 @@ const Setup = ({ setPokerHand, setSetup }) => {
     };
 
     const finishSetup = () => {
-        const hand = new PokerHand();
-        const players = {
+        const stackValues = {
             UTG: utgStack,
             UTG1: utg1Stack,
             MP: mpStack,
@@ -52,13 +51,20 @@ const Setup = ({ setPokerHand, setSetup }) => {
             BB: bbStack
         };
 
-        Object.keys(checkboxState).forEach(position => {
-            if (checkboxState[position]) {
-                const playerPosition = position.replace('Check', '');
-                hand.setStack(playerPosition, players[playerPosition]);
+        const result = {};
+        for (const [key, value] of Object.entries(checkboxState)) {
+            if (value === true) {
+                const stackKey = key.replace('Check', 'Stack');
+                result[stackKey] = stackValues[stackKey.replace('Stack', '')];
             }
-        });
+        }
+
+        const hand = {
+            players: result,
+            actions: [],
+        }
         setPokerHand(hand);
+        console.log(hand)
         setSetup(true);
     };
 
@@ -109,7 +115,7 @@ const Setup = ({ setPokerHand, setSetup }) => {
                         type="number"
                         value={utgStack}
                         onChange={handleChange(setUtgStack)}
-                        disabled={checkboxState.UTGCheck}
+                        disabled={!checkboxState.UTGCheck}
                         style={!checkboxState.UTGCheck ? styles.disabledInputStyle : {}}
                     />
                 </Form.Group>
@@ -124,8 +130,8 @@ const Setup = ({ setPokerHand, setSetup }) => {
                     <Form.Control
                         type="number"
                         value={utg1Stack}
-                        onChange={handleChange(setutg1Stack)}
-                        disabled={checkboxState.UTG1Check}
+                        onChange={handleChange(setUtg1Stack)}
+                        disabled={!checkboxState.UTG1Check}
                         style={!checkboxState.UTG1Check ? styles.disabledInputStyle : {}}
                     />
                 </Form.Group>
@@ -141,7 +147,7 @@ const Setup = ({ setPokerHand, setSetup }) => {
                         type="number"
                         value={mpStack}
                         onChange={handleChange(setMpStack)}
-                        disabled={checkboxState.MPCheck}
+                        disabled={!checkboxState.MPCheck}
                         style={!checkboxState.MPCheck ? styles.disabledInputStyle : {}}
                     />
                 </Form.Group>
@@ -157,7 +163,7 @@ const Setup = ({ setPokerHand, setSetup }) => {
                         type="number"
                         value={ljStack}
                         onChange={handleChange(setLjStack)}
-                        disabled={checkboxState.LJCheck}
+                        disabled={!checkboxState.LJCheck}
                         style={!checkboxState.LJCheck ? styles.disabledInputStyle : {}}
                     />
                 </Form.Group>
@@ -173,7 +179,7 @@ const Setup = ({ setPokerHand, setSetup }) => {
                         type="number"
                         value={hjStack}
                         onChange={handleChange(setHjStack)}
-                        disabled={checkboxState.HJCheck}
+                        disabled={!checkboxState.HJCheck}
                         style={!checkboxState.HJCheck ? styles.disabledInputStyle : {}}
                     />
                 </Form.Group>
@@ -189,7 +195,7 @@ const Setup = ({ setPokerHand, setSetup }) => {
                         type="number"
                         value={coStack}
                         onChange={handleChange(setCoStack)}
-                        disabled={checkboxState.COCheck}
+                        disabled={!checkboxState.COCheck}
                         style={!checkboxState.COCheck ? styles.disabledInputStyle : {}}
                     />
                 </Form.Group>
@@ -203,9 +209,9 @@ const Setup = ({ setPokerHand, setSetup }) => {
                     <Form.Label>BTN:</Form.Label>
                     <Form.Control
                         type="number"
-                        value={sbStack}
-                        onChange={handleChange(setSbStack)}
-                        disabled={checkboxState.BTNCheck}
+                        value={btnStack}
+                        onChange={handleChange(setBtnStack)}
+                        disabled={!checkboxState.BTNCheck}
                         style={!checkboxState.BTNCheck ? styles.disabledInputStyle : {}}
                     />
                 </Form.Group>
@@ -225,9 +231,9 @@ const styles = {
         flexDirection: 'row',
     },
     disabledInputStyle: {
-        backgroundColor: '#e9ecef',  // Light gray background
-        color: '#6c757d',  // Dimmed text color
-        borderColor: '#ced4da'  // Matching border color
+        backgroundColor: '#e9ecef',  
+        color: '#6c757d',  
+        borderColor: '#ced4da'  
     },
 };
 
