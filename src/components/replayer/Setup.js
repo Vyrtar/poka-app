@@ -59,26 +59,16 @@ const Setup = ({ setPokerHand, setSetup }) => {
         }
         
         const hand = {
+            data: {
+                sb: sB,
+                bb: bB,
+            },
             stacks: stackValues,
             players: playerResult,
             actions: [],
             last: {},
             current: {},
         };
-
-        hand.actions.push({
-            id: 1,
-            player: 'SB',
-            type: 'posts',
-            amount: sB,
-        });
-
-        hand.actions.push({
-            id: 2,
-            player: 'BB',
-            type: 'posts',
-            amount: bB,
-        });
 
         setPokerHand(hand);
         console.log(hand)

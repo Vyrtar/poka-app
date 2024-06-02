@@ -1,10 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button, Form, Col } from 'react-bootstrap';
 
 const Controller = ({ pokerHand, setPokerHand }) => {
     const [raiseAmount, setRaiseAmount] = useState(0);
-    const [currentPlayerIndex, setCurrentPlayerIndex] = useState(1);
+    const [currentPlayerIndex, setCurrentPlayerIndex] = useState(2);
+
+    const post1 = {
+        id: 0,
+        player: 'SB',
+        type: 'posts',
+        amount: pokerHand.data.sb,
+    }
+
+    const post2 = {
+        id: 1,
+        player: 'BB',
+        type: 'posts',
+        amount: pokerHand.data.bb,
+    }
+
+    const initialHand = {
+        ...pokerHand,
+        actions: [...pokerHand.actions, post1, post2],
+    }
+
+    useEffect(() => {
+        setPokerHand(initialHand);
+    }, []);
 
     const getNextPlayer = () => {
         setCurrentPlayerIndex((currentPlayerIndex + 1) % pokerHand.players.length);
