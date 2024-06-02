@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import PokerHand from './PokerHand.js';
 
 const Setup = ({ setPokerHand, setSetup }) => {
     const [sB, setSb] = useState(1);
@@ -20,6 +19,8 @@ const Setup = ({ setPokerHand, setSetup }) => {
     };
 
     const [checkboxState, setCheckboxState] = useState({
+        SBCheck: true,
+        BBCheck: true,
         UTGCheck: true,
         UTG1Check: true,
         MPCheck: true,
@@ -27,8 +28,6 @@ const Setup = ({ setPokerHand, setSetup }) => {
         HJCheck: true,
         COCheck: true,
         BTNCheck: true,
-        SBCheck: true,
-        BBCheck: true
     });
 
     const handleCheckboxChange = (name) => (event) => {
@@ -40,6 +39,8 @@ const Setup = ({ setPokerHand, setSetup }) => {
 
     const finishSetup = () => {
         const stackValues = {
+            SB: sbStack,
+            BB: bbStack,
             UTG: utgStack,
             UTG1: utg1Stack,
             MP: mpStack,
@@ -47,22 +48,38 @@ const Setup = ({ setPokerHand, setSetup }) => {
             HJ: hjStack,
             CO: coStack,
             BTN: btnStack,
-            SB: sbStack,
-            BB: bbStack
         };
 
-        const result = {};
+        const playerResult = [];
         for (const [key, value] of Object.entries(checkboxState)) {
-            if (value === true) {
-                const stackKey = key.replace('Check', 'Stack');
-                result[stackKey] = stackValues[stackKey.replace('Stack', '')];
+            if (value) {
+                const playerPosition = key.replace('Check', '');
+                playerResult.push(playerPosition);
             }
         }
-
+        
         const hand = {
-            players: result,
+            stacks: stackValues,
+            players: playerResult,
             actions: [],
-        }
+            last: {},
+            current: {},
+        };
+
+        hand.actions.push({
+            id: 1,
+            player: 'SB',
+            type: 'posts',
+            amount: sB,
+        });
+
+        hand.actions.push({
+            id: 2,
+            player: 'BB',
+            type: 'posts',
+            amount: bB,
+        });
+
         setPokerHand(hand);
         console.log(hand)
         setSetup(true);

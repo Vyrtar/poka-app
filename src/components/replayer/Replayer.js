@@ -6,7 +6,7 @@ const Replayer = ({pokerHand, setPokerHand}) => {
     return(
         <>
             <div>
-                <Controller pokerHand={pokerHand}/>
+                <Controller pokerHand={pokerHand} setPokerHand={setPokerHand}/>
                 <Viewer pokerHand={pokerHand} />
             </div>
         </>
