@@ -4,12 +4,20 @@ import Viewer from "./Viewer";
 import Sendit from "../Sendit"
 
 const Replayer = ({pokerHand, setPokerHand, user}) => {
+    
     return(
         <>
+        {/* <div>
+            {user.email}
+        </div> */}
             <div>
-               
                 <Controller pokerHand={pokerHand} setPokerHand={setPokerHand}/>
-                <Sendit pokerHand={pokerHand} user={user} />
+                {
+                    user ?
+                    <Sendit pokerHand={pokerHand} user={user} />
+                    : 'no user'
+                }
+                <p>{user.email}</p>
                 <Viewer pokerHand={pokerHand} />
             </div>
         </>

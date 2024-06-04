@@ -7,6 +7,7 @@ const Sendit = ({ pokerHand, user }) => {
     const [errors, setErrors] = useState({});
     const [sent, setSent] = useState(false);
     const [shareableLink, setShareableLink] = useState('');
+    const productionUrl = "https://pkhands.com";
 
     const handlePushData = () => {
         setErrors({});
@@ -17,14 +18,13 @@ const Sendit = ({ pokerHand, user }) => {
             return;
         }
 
-        const handData = { pokerHand };
         const path = `users/${user.uid}/hands`;
         const newPokerHandRef = push(ref(database, path));
         const pokerHandId = newPokerHandRef.key;
         set(newPokerHandRef, pokerHand)
             .then(() => {
                 console.log("Data pushed successfully");
-                const link = `${window.location.origin}/view/${user.uid}/${pokerHandId}`;
+                const link = `${productionUrl}/view/${user.uid}/${pokerHandId}`;
                 setShareableLink(link);
                 setSent(true);
             })

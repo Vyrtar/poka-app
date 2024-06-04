@@ -48,7 +48,6 @@ function App() {
   };
 
   return (
-
     <Router>
       <div className='App'>
         <Navbar bg="dark" variant="dark" expand="lg" className="body">
