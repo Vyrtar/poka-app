@@ -32,7 +32,7 @@ const Controller = ({ pokerHand, setPokerHand }) => {
     const getNextPlayer = () => {
         setCurrentPlayerIndex((currentPlayerIndex + 1) % pokerHand.players.length);
     }
-
+ 
     const handleAction = (type) => {
         getNextPlayer()
         const newAction = {
@@ -48,8 +48,7 @@ const Controller = ({ pokerHand, setPokerHand }) => {
             last: newAction
         };
         setPokerHand(updatedPokerHand)
-        console.log(pokerHand)
-        console.log(currentPlayerIndex)
+        
     }
 
     return (

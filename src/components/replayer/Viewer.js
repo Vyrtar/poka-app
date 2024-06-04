@@ -13,9 +13,9 @@ const Viewer = ({ pokerHand }) => {
             <p>
                 Player to Act: {pokerHand.players[currentPlayerIndex]}
             </p>
-            <p>
+            {/* <p>
                 Current Bet: {pokerHand.last.amount}
-            </p>
+            </p> */}
             <h4>Actions:</h4>
             {pokerHand.actions.map((action) => (
                 <div style={{ border: 1 }} key={action.id}>

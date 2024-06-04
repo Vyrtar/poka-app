@@ -18,6 +18,7 @@ import Session from './pages/Session';
 import DummyDataPusher from './pages/SessionDataPusher';
 import Parent from './components/replayer/Parent';
 import Hands from './pages/Hands';
+import ShareableView from './components/ShareableView';
 
 function App() {
 
@@ -93,11 +94,11 @@ function App() {
 
         <Routes>
           <Route path="/hands" element={<Hands />} />
-          <Route path="/upload" element={<Parent />} />
+          <Route path="/upload" element={<Parent user={user} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/mysessions" element={<Session user={user} />} />
-          
+          <Route path="/view/:userId/:pokerHandId" element={<ShareableView />} />
         </Routes>
       </div>
     </Router>
