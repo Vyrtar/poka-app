@@ -18,13 +18,13 @@ const Sendit = ({ pokerHand, user }) => {
             return;
         }
 
-        const path = `users/${user.uid}/hands`;
+        const path = `hands`;
         const newPokerHandRef = push(ref(database, path));
         const pokerHandId = newPokerHandRef.key;
         set(newPokerHandRef, pokerHand)
             .then(() => {
                 console.log("Data pushed successfully");
-                const link = `${productionUrl}/view/${user.uid}/${pokerHandId}`;
+                const link = `${productionUrl}/view/hands/${pokerHandId}`;
                 setShareableLink(link);
                 setSent(true);
             })

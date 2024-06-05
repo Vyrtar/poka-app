@@ -10,7 +10,7 @@ const ShareableView = () => {
 
     useEffect(() => {
         const database = getDatabase();
-        const pokerHandRef = ref(database, `users/${userId}/hands/${pokerHandId}`);
+        const pokerHandRef = ref(database, `hands/${pokerHandId}`);
         
         get(pokerHandRef)
             .then((snapshot) => {
@@ -25,7 +25,7 @@ const ShareableView = () => {
                 console.error("Error fetching poker hand:", error);
                 setLoading(false);
             });
-    }, [userId, pokerHandId]);
+    }, [pokerHandId]);
 
     if (loading) {
         return <div>Loading...</div>;
