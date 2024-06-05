@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { ref, push, set } from 'firebase/database';
 import { database } from '../firebase';
 
-const Sendit = ({ pokerHand, user }) => {
+const Sendit = ({ pokerHand }) => {
     const [errors, setErrors] = useState({});
     const [sent, setSent] = useState(false);
     const [shareableLink, setShareableLink] = useState('');

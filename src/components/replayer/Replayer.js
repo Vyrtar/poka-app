@@ -3,21 +3,13 @@ import Controller from "./Controller";
 import Viewer from "./Viewer";
 import Sendit from "../Sendit"
 
-const Replayer = ({pokerHand, setPokerHand, user}) => {
+const Replayer = ({pokerHand, setPokerHand }) => {
     
     return(
         <>
-        {/* <div>
-            {user.email}
-        </div> */}
             <div>
                 <Controller pokerHand={pokerHand} setPokerHand={setPokerHand}/>
-                {
-                    user ?
-                    <Sendit pokerHand={pokerHand} user={user} />
-                    : 'no user'
-                }
-                <p>{user.email}</p>
+                <Sendit pokerHand={pokerHand} />
                 <Viewer pokerHand={pokerHand} />
             </div>
         </>
