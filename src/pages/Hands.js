@@ -1,4 +1,4 @@
 const Hands = () => {
-    return <div>To be implemented</div>
+    return <div>There will be all hands here soon</div>
 }
 export default Hands
