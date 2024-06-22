@@ -1,3 +1,4 @@
+import { update } from 'firebase/database';
 import React, { useEffect, useState } from 'react';
 
 import { Button, Form, Col } from 'react-bootstrap';
@@ -29,12 +30,32 @@ const Controller = ({ pokerHand, setPokerHand }) => {
         setPokerHand(initialHand);
     }, []);
 
-    const getNextPlayer = () => {
-        setCurrentPlayerIndex((currentPlayerIndex + 1) % pokerHand.players.length);
-    }
- 
+
+    const iterateNext = (type) => {
+        let updatedPlayers = pokerHand.players.slice();
+        let newIndex = currentPlayerIndex;
+
+        if (type === 'folds') {
+            updatedPlayers.splice(currentPlayerIndex, 1);
+
+            // Adjust the index if necessary
+            if (newIndex >= updatedPlayers.length) {
+                newIndex = 0;
+            }
+        } else {
+            // Move to the next player if no fold action
+            newIndex = (currentPlayerIndex + 1) % updatedPlayers.length;
+        }
+
+        setPokerHand(prevHand => ({
+            ...prevHand,
+            players: updatedPlayers
+        }));
+
+        setCurrentPlayerIndex(newIndex);
+    };
+
     const handleAction = (type) => {
-        getNextPlayer()
         const newAction = {
             id: pokerHand.actions.length + 1,
             player: pokerHand.players[currentPlayerIndex],
@@ -42,13 +63,19 @@ const Controller = ({ pokerHand, setPokerHand }) => {
             amount: raiseAmount
         };
 
+        let updatedPlayers = pokerHand.players.slice();
+
         const updatedPokerHand = {
             ...pokerHand,
+            players: updatedPlayers,
             actions: [...pokerHand.actions, newAction],
-            last: newAction
+            last: pokerHand.current,
+            current: newAction,
         };
         setPokerHand(updatedPokerHand)
-        
+        iterateNext(type);
+        console.log(pokerHand.players)
+        console.log(currentPlayerIndex)
     }
 
     return (
