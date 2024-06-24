@@ -6,6 +6,7 @@ import { Button, Form, Col } from 'react-bootstrap';
 const Controller = ({ pokerHand, setPokerHand }) => {
     const [raiseAmount, setRaiseAmount] = useState(0);
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(2);
+    const [currentStreet, setCurrentStreet] = useState('preflop');
 
     const post1 = {
         id: 0,
@@ -23,7 +24,7 @@ const Controller = ({ pokerHand, setPokerHand }) => {
 
     const initialHand = {
         ...pokerHand,
-        actions: [...pokerHand.actions, post1, post2],
+        actions: {preflop: [...pokerHand.actions.preflop, post1, post2]}
     }
 
     useEffect(() => {
@@ -57,18 +58,48 @@ const Controller = ({ pokerHand, setPokerHand }) => {
 
     const handleAction = (type) => {
         const newAction = {
-            id: pokerHand.actions.length + 1,
+            id: pokerHand.actions.preflop.length + 1,
             player: pokerHand.players[currentPlayerIndex],
             type: type,
             amount: raiseAmount
         };
 
-        let updatedPlayers = pokerHand.players.slice();
-
+        let updatedActions = {
+            ...pokerHand.actions,
+        };
+        switch(currentStreet) {
+            case 'preflop':
+                updatedActions = {
+                    ...pokerHand.actions,
+                    preflop: [...pokerHand.actions.preflop, newAction]
+                }
+            break;
+            case 'flop':
+                updatedActions = {
+                    ...pokerHand.actions,
+                    flop: [...pokerHand.actions.flop, newAction]
+                }
+            break;
+            case 'turn':
+                updatedActions = {
+                    ...pokerHand.actions,
+                    turn: [...pokerHand.actions.turn, newAction]
+                }
+            break;
+            case 'river':
+                updatedActions = {
+                    ...pokerHand.actions,
+                    river: [...pokerHand.actions.river, newAction]
+                }
+            break;
+            default:
+              // code block
+          }
+        
+       
         const updatedPokerHand = {
             ...pokerHand,
-            players: updatedPlayers,
-            actions: [...pokerHand.actions, newAction],
+            actions: updatedActions,
             last: pokerHand.current,
             current: newAction,
         };

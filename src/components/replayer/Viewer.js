@@ -5,7 +5,7 @@ const Viewer = ({ pokerHand }) => {
     return (
         <div>
             <h4>Actions:</h4>
-            {pokerHand.actions.map((action) => (
+            {pokerHand.actions.preflop.map((action) => (
                 <div style={{ border: 1 }} key={action.id}>
                     <p>{action.player} {action.type} {action.amount}</p>
                 </div>

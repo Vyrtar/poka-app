@@ -65,7 +65,14 @@ const Setup = ({ setPokerHand, setSetup }) => {
             },
             stacks: stackValues,
             players: playerResult,
-            actions: [],
+            preflop: [],
+            actions: {
+                preflop: [],
+                flop: [],
+                turn: [],
+                river: [],
+                showdown: [],
+            },
             last: {},
             current: {},
         };
