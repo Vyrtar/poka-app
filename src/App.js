@@ -16,9 +16,10 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Session from './pages/Session';
 import DummyDataPusher from './pages/SessionDataPusher';
-import Parent from './components/replayer/Parent';
-import Hands from './pages/Hands';
+import HandsProvider from './components/pkHands/HandsProvider';
+import PokerHandController from './components/pkHands/PokerHandController';
 import ShareableView from './components/ShareableView';
+import PkHandsEntry from './components/pkHands/PkHandsEntry';
 
 function App() {
 
@@ -92,8 +93,7 @@ function App() {
         <hr />
 
         <Routes>
-          <Route path="/hands" element={<Hands />} />
-          <Route path="/upload" element={<Parent user={user} />} />
+          <Route path="/upload" element={<PkHandsEntry />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/mysessions" element={<Session user={user} />} />
