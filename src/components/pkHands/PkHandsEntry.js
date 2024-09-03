@@ -1,18 +1,25 @@
-// src/components/pkHands/pkHandsEntry.js
 import React from 'react';
-import { PokerProvider } from './HandsProvider';
+import { usePokerHand } from './PokerContext';
 import PokerHandController from './PokerHandController';
 import PokerHandViewer from './PokerHandViewer';
+import Sendit from './Sendit';
+import Setup from './Setup';
 
 const PkHandsEntry = () => {
-  return (
-    <PokerProvider>
-      <div>
-        <PokerHandController />
-        <PokerHandViewer />
-      </div>
-    </PokerProvider>
-  );
+	const {pokerHand} = usePokerHand();
+	return (
+		<div>
+			{
+				!pokerHand ? <Setup/> :
+					<>
+						<PokerHandController/>
+						<PokerHandViewer/>
+						<Sendit/>
+					</>
+			}
+		</div>
+
+	);
 };
 
 export default PkHandsEntry;

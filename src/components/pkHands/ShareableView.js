@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDatabase, ref, get, child } from "firebase/database";
-import Viewer from './replayer/Viewer';
+import PokerHandViewer from './PokerHandViewer';
 
 const ShareableView = () => {
     const { userId, pokerHandId } = useParams();
@@ -36,7 +36,7 @@ const ShareableView = () => {
     }
 
     return (
-       <Viewer pokerHand={pokerHand}/>
+       <PokerHandViewer pokerHand={pokerHand}/>
     );
 };
 

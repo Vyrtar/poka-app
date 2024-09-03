@@ -1,6 +1,6 @@
 // src/components/pkHands/PokerHandController.js
 import React, { useState } from 'react';
-import { usePokerHand } from './HandsProvider';
+import { usePokerHand } from './PokerContext';
 
 const PokerHandController = () => {
   const { setPlayerStack, setBlinds, addAction } = usePokerHand();

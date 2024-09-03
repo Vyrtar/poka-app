@@ -1,6 +1,6 @@
 import React from 'react';
-import UserDataLister from './UserDataLister';
-import SessionDataPusher from './SessionDataPusher';
+import UserDataLister from '../network/UserDataLister';
+import SessionDataPusher from '../network/SessionDataPusher';
 
 const Session = ({ user }) => {
     return (

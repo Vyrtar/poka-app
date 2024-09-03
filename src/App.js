@@ -10,16 +10,11 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Replayer from './components/hands-replayer/Replayer';
-import Upload from './pages/Upload';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Session from './pages/Session';
-import DummyDataPusher from './pages/SessionDataPusher';
-import HandsProvider from './components/pkHands/HandsProvider';
-import PokerHandController from './components/pkHands/PokerHandController';
-import ShareableView from './components/ShareableView';
-import PkHandsEntry from './components/pkHands/PkHandsEntry';
+import ShareableView from './components/pkHands/ShareableView';
+import PkComponent from './components/pkHands/pkComponent';
 
 function App() {
 
@@ -93,7 +88,7 @@ function App() {
         <hr />
 
         <Routes>
-          <Route path="/upload" element={<PkHandsEntry />} />
+          <Route path="/upload" element={ <PkComponent /> } />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/mysessions" element={<Session user={user} />} />

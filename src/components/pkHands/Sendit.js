@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { ref, push, set } from 'firebase/database';
-import { database } from '../firebase';
+import { database } from '../../firebase';
+import { usePokerHand } from './PokerContext';
 
-const Sendit = ({ pokerHand }) => {
+const Sendit = () => {
+  	const { pokerHand } = usePokerHand();
+
     const [errors, setErrors] = useState({});
     const [sent, setSent] = useState(false);
     const [shareableLink, setShareableLink] = useState('');
